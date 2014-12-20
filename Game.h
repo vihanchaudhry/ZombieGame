@@ -11,7 +11,10 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include "Background.h"
+#include "Player.h"
+
 
 class Game
 {
@@ -23,7 +26,17 @@ private:
 
 	sf::RenderWindow window;
 
+	// For movement - temporary
+	sf::Clock clock;
+	float deltaTime;
+
 	Background background;
+	Player player;
+
+	sf::Font courierNew;
+	sf::Font droid;
+	sf::Text gameTitle;
+	sf::Text instructions;
 
 	void loadAssets();
 
@@ -37,6 +50,7 @@ private:
 public:
 	Game();
 	void mainLoop();
+	void handeEvent(sf::Event);
 };
 
 #endif

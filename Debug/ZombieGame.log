@@ -1,18 +1,17 @@
-﻿Build started 12/17/2014 6:54:53 PM.
+﻿Build started 12/19/2014 8:05:20 PM.
      1>Project "C:\Users\Vihan C\Documents\DG\ZombieGame\ZombieGame\ZombieGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp Main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
          Game.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         Main.cpp
+     1>c:\users\vihan c\documents\dg\zombiegame\zombiegame\game.cpp(23): warning C4244: '=' : conversion from 'sf::Int32' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Vihan C\Documents\DG\ZombieGame\Debug\ZombieGame.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.1\Libs\Debug" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Vihan C\Documents\DG\ZombieGame\Debug\ZombieGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Vihan C\Documents\DG\ZombieGame\Debug\ZombieGame.lib" /MACHINE:X86 Debug\Background.obj
          Debug\Game.obj
          Debug\Main.obj
+         Debug\Player.obj
          ZombieGame.vcxproj -> C:\Users\Vihan C\Documents\DG\ZombieGame\Debug\ZombieGame.exe
      1>Done Building Project "C:\Users\Vihan C\Documents\DG\ZombieGame\ZombieGame\ZombieGame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.26
+Time Elapsed 00:00:01.03
