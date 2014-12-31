@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Game.h"
+#include "Player.h"
+#include <cmath>
 
 Game::Game()
 {
@@ -22,7 +24,7 @@ void Game::mainLoop()
 		sf::Event event;
 		deltaTime = clock.restart().asMilliseconds();
 		while (window.pollEvent(event))
-			handeEvent(event);
+			handleEvent(event);
 		if (GameState == mainMenu)
 			menuUpdate();
 		else if (GameState == inGame)
@@ -36,15 +38,13 @@ void Game::mainLoop()
 	}
 }
 
-void Game::handeEvent(sf::Event event)
+void Game::handleEvent(sf::Event event)
 {
 	if (event.type == sf::Event::Closed)
 		window.close();
 	if (sf::Event::KeyPressed)
 		if (event.key.code == sf::Keyboard::Escape)
 			window.close();
-		
-
 	// All events during main menu
 	if (GameState == mainMenu)
 	{
@@ -61,7 +61,7 @@ void Game::handeEvent(sf::Event event)
 	}
 	if (GameState == inGame)
 	{
-		
+
 	}
 	// Rest of the events here
 }
@@ -85,6 +85,14 @@ void Game::loadAssets()
 	instructions.setPosition(465, 425);
 }
 
+bool Game::isCollision(sf::FloatRect box1, sf::FloatRect box2)
+{
+	bool collision = false;
+	if (box1.intersects(box2))
+		collision = true;
+	return collision;
+}
+
 void Game::menuUpdate()
 {
 	background.update();
@@ -101,6 +109,12 @@ void Game::gameUpdate()
 		player.left(deltaTime);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		player.right(deltaTime);
+
+	// Testing shooting
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		bullet.fireLeft();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		bullet.fireRight();
 }
 
 void Game::pauseUpdate()
@@ -126,6 +140,7 @@ void Game::render()
 	else if (GameState == inGame)
 	{
 		player.render(window);
+		bullet.render(window);
 	}
 	else if (GameState == paused)
 	{

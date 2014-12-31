@@ -1,4 +1,7 @@
 #include "Player.h"
+#include "Game.h"
+#include "Bullet.h"
+#include "Background.h"
 
 Player::Player()
 {
@@ -6,6 +9,8 @@ Player::Player()
 	playerSprite.setTexture(playerTexture);
 	playerSprite.setOrigin(31.5, 53.5);
 	playerSprite.setPosition(640, 360);
+
+	collisionBox = playerSprite.getGlobalBounds();
 	
 	playerSpeed = 0.5;
 }
@@ -33,4 +38,9 @@ void Player::left(float &dT)
 void Player::right(float &dT)
 {
 	playerSprite.move(playerSpeed * dT, 0.f);
+}
+
+const sf::FloatRect Player::getCollisionBox()
+{
+	return collisionBox;
 }

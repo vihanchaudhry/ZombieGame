@@ -14,7 +14,7 @@
 #include <SFML/System.hpp>
 #include "Background.h"
 #include "Player.h"
-
+#include "Bullet.h"
 
 class Game
 {
@@ -26,19 +26,17 @@ private:
 
 	sf::RenderWindow window;
 
-	// For movement - temporary
 	sf::Clock clock;
 	float deltaTime;
 
 	Background background;
 	Player player;
+	Bullet bullet;
 
 	sf::Font courierNew;
 	sf::Font droid;
 	sf::Text gameTitle;
 	sf::Text instructions;
-
-	void loadAssets();
 
 	// Update functions
 	void menuUpdate();
@@ -47,10 +45,12 @@ private:
 	void postUpdate();
 
 	void render();
+	void loadAssets();
+	bool isCollision(sf::FloatRect, sf::FloatRect);
 public:
 	Game();
 	void mainLoop();
-	void handeEvent(sf::Event);
+	void handleEvent(sf::Event);
 };
 
 #endif

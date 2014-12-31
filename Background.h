@@ -9,9 +9,14 @@ public:
 	Background();
 	void update();
 	void render(sf::RenderWindow &);
+	const sf::FloatRect getLeftBox();
 private:
 	sf::Texture bgTexture;
 	sf::RectangleShape bgRect;
+
+	// Walls
+	sf::RectangleShape leftWall;
+	sf::FloatRect leftBox;
 };
 
 #endif
