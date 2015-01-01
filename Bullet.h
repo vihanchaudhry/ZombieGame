@@ -8,14 +8,17 @@ class Bullet
 public:
 	Bullet();
 	void render(sf::RenderWindow &);
+	void update();
 
 	// Accessors
 	const float getX()
-	{ return xPos; }
+	{ return bulletSprite.getPosition().x; }
 	const float getY()
-	{ return yPos; }
-	const float getSpeed()
-	{ return bulletSpeed; }
+	{ return bulletSprite.getPosition().y; }
+	const float getSpeedX()
+	{ return speedX; }
+	const float getSpeedY()
+	{ return speedY; }
 
 	void setPosition(float, float);
 
@@ -25,9 +28,8 @@ public:
 	void fireLeft();
 	void fireRight();
 private:
-	float xPos;
-	float yPos;
-	float bulletSpeed;
+	float speedX;
+	float speedY;
 	sf::Texture bulletTexture;
 	sf::Sprite bulletSprite;
 };

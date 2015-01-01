@@ -33,7 +33,6 @@ void Game::mainLoop()
 			pauseUpdate();
 		else if (GameState == postGame)
 			postUpdate();
-
 		render();
 	}
 }
@@ -101,6 +100,7 @@ void Game::menuUpdate()
 void Game::gameUpdate()
 {
 	background.update();
+	bullet.update();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		player.up(deltaTime);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -111,10 +111,26 @@ void Game::gameUpdate()
 		player.right(deltaTime);
 
 	// Testing shooting
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		bullet.setPosition(player.getX(), player.getY());
+		bullet.fireUp();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		bullet.setPosition(player.getX(), player.getY());
+		bullet.fireDown();
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		bullet.setPosition(player.getX(), player.getY());
 		bullet.fireLeft();
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		bullet.setPosition(player.getX(), player.getY());
 		bullet.fireRight();
+	}
 }
 
 void Game::pauseUpdate()
