@@ -9,7 +9,7 @@ Bullet::Bullet()
 	speedY = 0;
 
 	bulletSprite.setOrigin(16, 16);
-	bulletSprite.setPosition(660, 360); // temp
+
 }
 
 void Bullet::render(sf::RenderWindow &window)
@@ -20,6 +20,37 @@ void Bullet::render(sf::RenderWindow &window)
 void Bullet::update()
 {
 	bulletSprite.move(speedX, speedY);
+}
+
+void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bullet, std::vector<Bullet> &bullets)
+{
+	if (delayTime >= 0.3f)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			bullets.push_back(bullet);
+			bullets[bullets.size() - 1].fireUp();
+			delayClock.restart().asSeconds();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			bullets.push_back(bullet);
+			bullets[bullets.size() - 1].fireDown();
+			delayClock.restart().asSeconds();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			bullets.push_back(bullet);
+			bullets[bullets.size() - 1].fireLeft();
+			delayClock.restart().asSeconds();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			bullets.push_back(bullet);
+			bullets[bullets.size() - 1].fireRight();
+			delayClock.restart().asSeconds();
+		}
+	}
 }
 
 void Bullet::setPosition(float x, float y)

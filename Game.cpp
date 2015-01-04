@@ -102,40 +102,12 @@ void Game::gameUpdate()
 	background.update();
 	player.update();
 	for (size_t i = 0; i < bullets.size(); i++)
-	{
 		bullets[i].update();
-	}
 
 	// Shooting
-	fireTime = fireClock.getElapsedTime().asSeconds();  // Fire delay
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && fireTime > 0.3f)
-	{
-		bullets.push_back(bullet);
-		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
-		bullets[bullets.size() - 1].fireUp();
-		fireClock.restart().asSeconds();
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && fireTime > 0.3f)
-	{
-		bullets.push_back(bullet);
-		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
-		bullets[bullets.size() - 1].fireDown();
-		fireClock.restart().asSeconds();
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && fireTime > 0.3f)
-	{
-		bullets.push_back(bullet);
-		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
-		bullets[bullets.size() - 1].fireLeft();
-		fireClock.restart().asSeconds();
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && fireTime > 0.3f)
-	{	
-		bullets.push_back(bullet);
-		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
-		bullets[bullets.size() - 1].fireRight();
-		fireClock.restart().asSeconds();
-	}
+	fireTime = fireClock.getElapsedTime().asSeconds();  // Fire delay clock
+	bullet.setPosition(player.getX(), player.getY());
+	bullet.handleShooting(fireTime, fireClock, bullet, bullets);
 }
 
 void Game::pauseUpdate()
@@ -159,11 +131,9 @@ void Game::render()
 		window.draw(instructions);
 	}
 	else if (GameState == inGame)
-	{	
+	{
 		for (size_t i = 0; i < bullets.size(); i++)
-		{
 			bullets[i].render(window);
-		}
 		player.render(window);
 	}
 	else if (GameState == paused)

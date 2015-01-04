@@ -10,12 +10,6 @@ public:
 	void render(sf::RenderWindow &);
 	void update();
 
-	// Player movement functions
-	void up();
-	void down();
-	void left();
-	void right();
-
 	const float getX()
 	{ return playerSprite.getPosition().x; }
 	const float getY()
@@ -26,6 +20,12 @@ private:
 	sf::Texture playerTexture;
 	sf::Sprite playerSprite;
 	sf::FloatRect collisionBox;
+
+	// Player movement functions
+	void up();
+	void down();
+	void left();
+	void right();
 };
 
 #endif

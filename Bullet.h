@@ -9,6 +9,7 @@ public:
 	Bullet();
 	void render(sf::RenderWindow &);
 	void update();
+	void handleShooting(float, sf::Clock &, Bullet, std::vector<Bullet> &);
 
 	// Mutators
 	void setPosition(float, float);
