@@ -1,12 +1,3 @@
-#ifdef SFML_STATIC
-#pragma comment(lib, "glew.lib")
-#pragma comment(lib, "freetype.lib")
-#pragma comment(lib, "jpeg.lib")
-#pragma comment(lib, "opengl32.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "gdi32.lib")  
-#endif // SFML_STATIC
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -15,6 +6,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Bullet.h"
+#include <vector>
 
 class Game
 {
@@ -26,12 +18,13 @@ private:
 
 	sf::RenderWindow window;
 
-	sf::Clock clock;
-	float deltaTime;
+	sf::Clock fireClock;
+	float fireTime;
 
 	Background background;
 	Player player;
 	Bullet bullet;
+	std::vector<Bullet> bullets;
 
 	sf::Font courierNew;
 	sf::Font droid;

@@ -10,6 +10,11 @@ public:
 	void render(sf::RenderWindow &);
 	void update();
 
+	// Mutators
+	void setPosition(float, float);
+	void setSpeedX(float);
+	void setSpeedY(float);
+
 	// Accessors
 	const float getX()
 	{ return bulletSprite.getPosition().x; }
@@ -19,8 +24,6 @@ public:
 	{ return speedX; }
 	const float getSpeedY()
 	{ return speedY; }
-
-	void setPosition(float, float);
 
 	// Fire functions
 	void fireUp();

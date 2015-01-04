@@ -1,7 +1,4 @@
 #include "Player.h"
-#include "Game.h"
-#include "Bullet.h"
-#include "Background.h"
 
 Player::Player()
 {
@@ -12,7 +9,7 @@ Player::Player()
 
 	collisionBox = playerSprite.getGlobalBounds();
 	
-	playerSpeed = 0.5;
+	playerSpeed = 8;
 }
 
 void Player::render(sf::RenderWindow &window)
@@ -20,24 +17,40 @@ void Player::render(sf::RenderWindow &window)
 	window.draw(playerSprite);
 }
 
-void Player::up(float &dT)
+void Player::update()
 {
-	playerSprite.move(0.f, -playerSpeed * dT);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		up();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		down();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		left();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		right();
 }
 
-void Player::down(float &dT)
+void Player::up()
 {
-	playerSprite.move(0.f, playerSpeed * dT);
+	if (getY() >= 100)
+		playerSprite.move(0.f, -playerSpeed);
 }
 
-void Player::left(float &dT)
+void Player::down()
 {
-	playerSprite.move(-playerSpeed * dT, 0.f);
+	if (getY() <= 655)
+		playerSprite.move(0.f, playerSpeed);
 }
 
-void Player::right(float &dT)
+void Player::left()
 {
-	playerSprite.move(playerSpeed * dT, 0.f);
+	if (getX() >= 85)
+		playerSprite.move(-playerSpeed, 0.f);
+}
+
+void Player::right()
+{
+	if (getX() <= 1195)
+		playerSprite.move(playerSpeed, 0.f);
 }
 
 const sf::FloatRect Player::getCollisionBox()

@@ -1,16 +1,17 @@
 #include <iostream>
 #include "Game.h"
-#include "Player.h"
-#include <cmath>
 
 Game::Game()
 {
-	window.create(sf::VideoMode(1280, 720), "Untitled Zombie Game", sf::Style::Fullscreen); //  Doesn't have to be fullscreen
+	window.create(sf::VideoMode(1280, 720), "Untitled Zombie Game", sf::Style::Fullscreen);
 	window.setKeyRepeatEnabled(false);
+	window.setMouseCursorVisible(false);
 
 	// For more smoothing, set VSync to false and Framerate to ~500
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
+
+	fireTime = fireClock.restart().asSeconds();
 
 	loadAssets();
 
@@ -22,7 +23,6 @@ void Game::mainLoop()
 	while (window.isOpen())
 	{
 		sf::Event event;
-		deltaTime = clock.restart().asMilliseconds();
 		while (window.pollEvent(event))
 			handleEvent(event);
 		if (GameState == mainMenu)
@@ -98,38 +98,43 @@ void Game::menuUpdate()
 }
 
 void Game::gameUpdate()
-{
+{	
 	background.update();
-	bullet.update();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		player.up(deltaTime);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		player.down(deltaTime);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		player.left(deltaTime);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		player.right(deltaTime);
+	player.update();
+	for (size_t i = 0; i < bullets.size(); i++)
+	{
+		bullets[i].update();
+	}
 
-	// Testing shooting
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	// Shooting
+	fireTime = fireClock.getElapsedTime().asSeconds();  // Fire delay
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && fireTime > 0.3f)
 	{
-		bullet.setPosition(player.getX(), player.getY());
-		bullet.fireUp();
+		bullets.push_back(bullet);
+		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
+		bullets[bullets.size() - 1].fireUp();
+		fireClock.restart().asSeconds();
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && fireTime > 0.3f)
 	{
-		bullet.setPosition(player.getX(), player.getY());
-		bullet.fireDown();
+		bullets.push_back(bullet);
+		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
+		bullets[bullets.size() - 1].fireDown();
+		fireClock.restart().asSeconds();
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && fireTime > 0.3f)
 	{
-		bullet.setPosition(player.getX(), player.getY());
-		bullet.fireLeft();
+		bullets.push_back(bullet);
+		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
+		bullets[bullets.size() - 1].fireLeft();
+		fireClock.restart().asSeconds();
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		bullet.setPosition(player.getX(), player.getY());
-		bullet.fireRight();
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && fireTime > 0.3f)
+	{	
+		bullets.push_back(bullet);
+		bullets[bullets.size() - 1].setPosition(player.getX(), player.getY());
+		bullets[bullets.size() - 1].fireRight();
+		fireClock.restart().asSeconds();
 	}
 }
 
@@ -154,9 +159,12 @@ void Game::render()
 		window.draw(instructions);
 	}
 	else if (GameState == inGame)
-	{
+	{	
+		for (size_t i = 0; i < bullets.size(); i++)
+		{
+			bullets[i].render(window);
+		}
 		player.render(window);
-		bullet.render(window);
 	}
 	else if (GameState == paused)
 	{

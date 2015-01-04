@@ -8,12 +8,13 @@ class Player
 public:
 	Player();
 	void render(sf::RenderWindow &);
+	void update();
 
 	// Player movement functions
-	void up(float &);
-	void down(float &);
-	void left(float &);
-	void right(float &);
+	void up();
+	void down();
+	void left();
+	void right();
 
 	const float getX()
 	{ return playerSprite.getPosition().x; }
