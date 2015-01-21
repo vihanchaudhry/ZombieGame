@@ -5,6 +5,7 @@
 #include <SFML/System.hpp>
 #include "Background.h"
 #include "Player.h"
+#include "Enemies.h"
 #include "Bullet.h"
 #include <vector>
 
@@ -23,6 +24,7 @@ private:
 
 	Background background;
 	Player player;
+	Enemies enemy;
 	Bullet bullet;
 	std::vector<Bullet> bullets;
 

@@ -6,8 +6,6 @@ Player::Player()
 	playerSprite.setTexture(playerTexture);
 	playerSprite.setOrigin(31.5, 53.5);
 	playerSprite.setPosition(640, 360);
-
-	collisionBox = playerSprite.getGlobalBounds();
 	
 	playerSpeed = 8;
 }
@@ -51,9 +49,4 @@ void Player::right()
 {
 	if (getX() <= 1195)
 		playerSprite.move(playerSpeed, 0.f);
-}
-
-const sf::FloatRect Player::getCollisionBox()
-{
-	return collisionBox;
 }
