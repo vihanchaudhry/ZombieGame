@@ -9,7 +9,6 @@ Bullet::Bullet()
 	speedY = 0;
 
 	bulletSprite.setOrigin(16, 16);
-
 }
 
 void Bullet::render(sf::RenderWindow &window)
@@ -29,24 +28,32 @@ void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bulle
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			bullets.push_back(bullet);
+			if (bullets[bullets.size() - 1].getBulletRotation() != 270)
+				bullets[bullets.size() - 1].rotateBullet(270);
 			bullets[bullets.size() - 1].fireUp();
 			delayClock.restart().asSeconds();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
 			bullets.push_back(bullet);
+			if (bullets[bullets.size() - 1].getBulletRotation() != 90)
+				bullets[bullets.size() - 1].rotateBullet(90);
 			bullets[bullets.size() - 1].fireDown();
 			delayClock.restart().asSeconds();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			bullets.push_back(bullet);
+			if (bullets[bullets.size() - 1].getBulletRotation() != 180)
+				bullets[bullets.size() - 1].rotateBullet(180);
 			bullets[bullets.size() - 1].fireLeft();
 			delayClock.restart().asSeconds();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 			bullets.push_back(bullet);
+			if (bullets[bullets.size() - 1].getBulletRotation() != 0)
+				bullets[bullets.size() - 1].rotateBullet(0);
 			bullets[bullets.size() - 1].fireRight();
 			delayClock.restart().asSeconds();
 		}
@@ -66,6 +73,11 @@ void Bullet::setSpeedX(float x)
 void Bullet::setSpeedY(float y)
 {
 	speedY = y;
+}
+
+void Bullet::rotateBullet(float rotation)
+{
+	bulletSprite.setRotation(rotation);
 }
 
 void Bullet::fireUp()

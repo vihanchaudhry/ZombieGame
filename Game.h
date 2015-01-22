@@ -18,6 +18,7 @@ private:
 	}GameState;
 
 	sf::RenderWindow window;
+	sf::View camera;
 
 	sf::Clock fireClock;
 	float fireTime;

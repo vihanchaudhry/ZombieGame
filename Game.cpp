@@ -3,13 +3,15 @@
 
 Game::Game()
 {
-	window.create(sf::VideoMode(1280, 720), "Untitled Zombie Game");
+	window.create(sf::VideoMode(1280, 720), "Untitled Zombie Game", sf::Style::Fullscreen);
 	window.setKeyRepeatEnabled(false);
 	window.setMouseCursorVisible(false);
 
 	// For more smoothing, set VSync to false and Framerate to ~500
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
+
+	camera.setCenter(sf::Vector2f(640, 360));
 
 	fireTime = fireClock.restart().asSeconds();
 
@@ -98,7 +100,12 @@ void Game::menuUpdate()
 }
 
 void Game::gameUpdate()
-{	
+{
+	// Camera
+	camera.setSize(sf::Vector2f(1280, 720));
+	camera.setCenter(player.getX(), player.getY());
+	window.setView(camera);
+
 	background.update();
 	player.update();
 	enemy.update();

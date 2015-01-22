@@ -15,6 +15,7 @@ public:
 	void setPosition(float, float);
 	void setSpeedX(float);
 	void setSpeedY(float);
+	void rotateBullet(float);
 
 	// Accessors
 	const float getX()
@@ -25,6 +26,8 @@ public:
 	{ return speedX; }
 	const float getSpeedY()
 	{ return speedY; }
+	const float getBulletRotation()
+	{ return bulletSprite.getRotation(); }
 
 	// Fire functions
 	void fireUp();
