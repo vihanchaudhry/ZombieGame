@@ -7,7 +7,7 @@ Player::Player()
 	playerSprite.setOrigin(31.5, 53.5);
 	playerSprite.setPosition(640, 360);
 	
-	playerSpeed = 8;
+	playerSpeed = 10;
 }
 
 void Player::render(sf::RenderWindow &window)
@@ -29,13 +29,13 @@ void Player::update()
 
 void Player::up()
 {
-	if (getY() >= 100)
+	if (getY() >= 105)
 		playerSprite.move(0.f, -playerSpeed);
 }
 
 void Player::down()
 {
-	if (getY() <= 655)
+	if (getY() <= 1375)
 		playerSprite.move(0.f, playerSpeed);
 }
 

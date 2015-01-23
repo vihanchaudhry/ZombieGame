@@ -114,7 +114,7 @@ void Game::gameUpdate()
 
 	// Testing Player-Enemy Collision
 	if (isCollision(player.getCollisionBox(), enemy.getCollisionBox()))
-		std::cout << "collision!" << std::endl;
+		std::cout << "collision ";
 
 	// Shooting
 	fireTime = fireClock.getElapsedTime().asSeconds();  // Fire delay clock

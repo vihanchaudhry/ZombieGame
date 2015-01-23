@@ -13,10 +13,6 @@ public:
 private:
 	sf::Texture bgTexture;
 	sf::RectangleShape bgRect;
-
-	// Walls
-	sf::RectangleShape leftWall;
-	sf::FloatRect leftBox;
 };
 
 #endif
