@@ -1,8 +1,8 @@
 #include "Background.h"
 
 Background::Background()
-{
-	bgTexture.loadFromFile("extended_bg.png");
+{	
+	bgTexture.loadFromFile("extended_isaac_bg.png");
 	bgRect.setSize(sf::Vector2f(1280, 1440));
 	bgRect.setTexture(&bgTexture);
 }
