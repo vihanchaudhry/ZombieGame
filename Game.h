@@ -26,8 +26,11 @@ private:
 	Background background;
 	Player player;
 	Enemies enemy;
+	std::vector<Enemies> enemies;
 	Bullet bullet;
 	std::vector<Bullet> bullets;
+
+	// Eventually moved to level design class
 
 	sf::Font courierNew;
 	sf::Font droid;
@@ -42,6 +45,7 @@ private:
 
 	void render();
 	void loadAssets();
+
 	bool isCollision(sf::FloatRect, sf::FloatRect);
 public:
 	Game();

@@ -2,14 +2,16 @@
 #define BULLET_H
 
 #include <SFML/Graphics.hpp>
+#include "Enemies.h"
 
 class Bullet
 {
 public:
 	Bullet();
 	void render(sf::RenderWindow &);
-	void update();
+	void update(std::vector<Bullet> &, std::vector<Enemies> &, Enemies);
 	void handleShooting(float, sf::Clock &, Bullet, std::vector<Bullet> &);
+	void enemyHit(std::vector<Bullet> &, std::vector<Enemies> &, Enemies enemy);
 
 	// Mutators
 	void setPosition(float, float);
@@ -28,6 +30,10 @@ public:
 	{ return speedY; }
 	const float getBulletRotation()
 	{ return bulletSprite.getRotation(); }
+	const sf::FloatRect getCollisionBox()
+	{ return bulletSprite.getGlobalBounds(); }
+	const float getLiveTime()
+	{ return liveTime.getElapsedTime().asSeconds(); }
 
 	// Fire functions
 	void fireUp();
@@ -39,6 +45,7 @@ private:
 	float speedY;
 	sf::Texture bulletTexture;
 	sf::Sprite bulletSprite;
+	sf::Clock liveTime;
 };
 
 #endif

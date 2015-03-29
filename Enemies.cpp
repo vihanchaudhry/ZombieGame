@@ -20,7 +20,13 @@ void Enemies::update()
 	// whatever happens every frame
 }
 
+void Enemies::spawnEnemy(Enemies enemy, std::vector<Enemies> &enemies, sf::Vector2f spawnPos)
+{
+	enemySprite.setPosition(spawnPos);
+	enemies.push_back(enemy);
+}
+
 void Enemies::randomizePosition()
 {
-
+	// nothing yet
 }

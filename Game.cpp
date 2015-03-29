@@ -3,7 +3,7 @@
 
 Game::Game()
 {
-	window.create(sf::VideoMode(1280, 720), "Untitled Zombie Game", sf::Style::Fullscreen);
+	window.create(sf::VideoMode(1280, 720), "Untitled Zombie Game");
 	window.setKeyRepeatEnabled(false);
 	window.setMouseCursorVisible(false);
 
@@ -57,12 +57,15 @@ void Game::handleEvent(sf::Event event)
 			{
 				// Move to inGame (start playing)
 				GameState = inGame;
+				int numEnemies = 6;
+				for (int i = 0; i < numEnemies; i++)
+					enemy.spawnEnemy(enemy, enemies, sf::Vector2f(200 * (i + 1), 200));
 			}
 		}
 	}
 	if (GameState == inGame)
 	{
-
+		// w/e
 	}
 	// Rest of the events here
 }
@@ -108,13 +111,10 @@ void Game::gameUpdate()
 
 	background.update();
 	player.update();
-	enemy.update();
+	for (size_t i = 0; i < enemies.size(); i++)
+		enemies[i].update();
 	for (size_t i = 0; i < bullets.size(); i++)
-		bullets[i].update();
-
-	// Testing Player-Enemy Collision
-	if (isCollision(player.getCollisionBox(), enemy.getCollisionBox()))
-		std::cout << "collision ";
+		bullets[i].update(bullets, enemies, enemy);
 
 	// Shooting
 	fireTime = fireClock.getElapsedTime().asSeconds();  // Fire delay clock
@@ -144,7 +144,8 @@ void Game::render()
 	}
 	else if (GameState == inGame)
 	{
-		enemy.render(window);
+		for (size_t i = 0; i < enemies.size(); i++)
+			enemies[i].render(window);
 		for (size_t i = 0; i < bullets.size(); i++)
 			bullets[i].render(window);
 		player.render(window);

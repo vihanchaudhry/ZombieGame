@@ -16,14 +16,15 @@ void Bullet::render(sf::RenderWindow &window)
 	window.draw(bulletSprite);
 }
 
-void Bullet::update()
+void Bullet::update(std::vector<Bullet> &bullets, std::vector<Enemies> &enemies, Enemies enemy)
 {
 	bulletSprite.move(speedX, speedY);
+	enemyHit(bullets, enemies, enemy);
 }
 
 void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bullet, std::vector<Bullet> &bullets)
 {
-	if (delayTime >= 0.3f)
+	if (delayTime >= 0.25f)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
@@ -32,6 +33,7 @@ void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bulle
 				bullets[bullets.size() - 1].rotateBullet(270);
 			bullets[bullets.size() - 1].fireUp();
 			delayClock.restart().asSeconds();
+			liveTime.restart().asSeconds();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
@@ -40,6 +42,7 @@ void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bulle
 				bullets[bullets.size() - 1].rotateBullet(90);
 			bullets[bullets.size() - 1].fireDown();
 			delayClock.restart().asSeconds();
+			liveTime.restart().asSeconds();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
@@ -48,6 +51,7 @@ void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bulle
 				bullets[bullets.size() - 1].rotateBullet(180);
 			bullets[bullets.size() - 1].fireLeft();
 			delayClock.restart().asSeconds();
+			liveTime.restart().asSeconds();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
@@ -56,8 +60,22 @@ void Bullet::handleShooting(float delayTime, sf::Clock &delayClock, Bullet bulle
 				bullets[bullets.size() - 1].rotateBullet(0);
 			bullets[bullets.size() - 1].fireRight();
 			delayClock.restart().asSeconds();
+			liveTime.restart().asSeconds();
 		}
 	}
+}
+
+void Bullet::enemyHit(std::vector<Bullet> &bullets, std::vector<Enemies> &enemies, Enemies enemy)
+{
+	for (int i = 0; i < bullets.size(); i++)
+		for (int j = 0; j < enemy.getNumEnemies(); j++)
+		{
+			if (bullets[i].getCollisionBox().intersects(enemies[j].getCollisionBox()))
+			{
+				bullets.erase(bullets.begin() + j);
+				// damage enemy
+			}
+		}
 }
 
 void Bullet::setPosition(float x, float y)
